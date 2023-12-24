@@ -11,26 +11,23 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public class CourseJpaRepository 
-{
-	//@Autowired(could be used) but recommended is PersistenceContext
-	
-	@PersistenceContext
+public class CourseJpaRepository {
+    // @Autowired(could be used) but recommended is PersistenceContext
+    // helps in persistence binding
+
+    @PersistenceContext
     private EntityManager entityManager;
-    
-    public void insert(Course course) 
-    {
-    	entityManager.merge(course);
+
+    public void insert(Course course) {
+        entityManager.merge(course);
     }
-    
-    public Course findById(long id)
-    {
-    	 return entityManager.find(Course.class, id);
+
+    public Course findById(long id) {
+        return entityManager.find(Course.class, id);
     }
-    
-    public void deleteById(long id)
-    {
-    	Course foundCourseById  = entityManager.find(Course.class, id);
-    	entityManager.remove(foundCourseById);
+
+    public void deleteById(long id) {
+        Course foundCourseById = entityManager.find(Course.class, id);
+        entityManager.remove(foundCourseById);
     }
 }
